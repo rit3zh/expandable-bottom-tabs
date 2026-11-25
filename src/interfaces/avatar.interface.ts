@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 
 type TAvatarFont = "sans" | "serif";
@@ -10,6 +11,7 @@ interface IAvatar {
   backgroundColor?: string;
   color?: string;
   style?: StyleProp<ViewStyle>;
+  children?: ReactNode;
 }
 
 export { type IAvatar, type TAvatarFont };
