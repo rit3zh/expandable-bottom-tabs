@@ -4,6 +4,10 @@ A Liquid Glass bottom tab bar for iOS that expands into a workspace card and a p
 
 ---
 
+
+https://github.com/user-attachments/assets/e88265d3-1449-4299-aa1b-b1699d9289e3
+
+
 ## ⚙️ Installation
 
 ```bash
@@ -57,3 +61,5 @@ Tap the workspace or the avatar to expand the bar. Tap the status button on the 
 ## 🧱 Stack
 
 [Expo SDK 58](https://expo.dev/changelog) · [React Native 0.88](https://reactnative.dev/) · [Expo Router](https://docs.expo.dev/router/introduction/) · [Expo UI](https://docs.expo.dev/versions/latest/sdk/ui/) · [Reanimated](https://docs.swmansion.com/react-native-reanimated/) · [Skia](https://shopify.github.io/react-native-skia/)
+
+This component is inspired by: https://x.com/yanayank/status/2053518552150221240
