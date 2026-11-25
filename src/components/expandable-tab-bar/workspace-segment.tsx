@@ -19,6 +19,7 @@ import {
   BAR_PULSE_MIN_SCALE,
   BAR_SEGMENT_INSET,
 } from "@/constants/expandable-tab-bar.const";
+import { EXPO_LOGO_RATIO } from "@/constants/expo-logo.const";
 import { TYPOGRAPHY_ROUNDED_FAMILY } from "@/constants/typography.const";
 import { registerComponent } from "@/utils/register-component.util";
 
@@ -114,13 +115,12 @@ const WorkspaceSegmentBase: FC<IWorkspaceSegment> = ({
               maxRadius={BAR_PULSE_BLUR_RADIUS}
               minScale={BAR_PULSE_MIN_SCALE}
             >
-              <Avatar
-                size={BAR_AVATAR_SIZE}
-                label={workspace.mark}
-                font="serif"
-                backgroundColor={palette.mark}
-                color={palette.text}
-              />
+              <Avatar size={BAR_AVATAR_SIZE} backgroundColor={palette.mark}>
+                <workspace.logo
+                  size={BAR_AVATAR_SIZE * EXPO_LOGO_RATIO}
+                  color={palette.text}
+                />
+              </Avatar>
             </MorphBlur>
           </Animated.View>
         </Pressable>
