@@ -21,6 +21,7 @@ const AvatarBase: FC<IAvatar> = ({
   backgroundColor,
   color,
   style,
+  children,
 }: IAvatar & React.ComponentProps<typeof AvatarBase>): React.ReactNode &
   React.JSX.Element => (
   <View
@@ -35,7 +36,7 @@ const AvatarBase: FC<IAvatar> = ({
       style,
     ]}
   >
-    {uri ? (
+    {children ?? (uri ? (
       <Image
         source={{ uri }}
         contentFit="cover"
@@ -57,7 +58,7 @@ const AvatarBase: FC<IAvatar> = ({
       >
         {label}
       </Text>
-    )}
+    ))}
   </View>
 );
 
