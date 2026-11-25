@@ -1,0 +1,39 @@
+diff --git a/ios/Models/LabelStyle.swift b/ios/Models/LabelStyle.swift
+index 8544642e62d01d52c21b298f57a62b7965639017..a506ac33990c90cc4e1d6d11c3e44fb3b8e87156 100644
+--- a/ios/Models/LabelStyle.swift
++++ b/ios/Models/LabelStyle.swift
+@@ -15,13 +15,18 @@ struct LabelStyle {
+     let weight = TabsFontWeight.font(from: style?.fontWeight)
+ 
+     var font: UIFont
+-    if let family = style?.fontFamily, !family.isEmpty,
+-      let named = UIFont(name: family, size: size)
++    let systemFont = UIFont.systemFont(ofSize: size, weight: weight)
++    let family = style?.fontFamily?.lowercased() ?? ""
++    if family == "ui-rounded" || family == "rounded",
++      let rounded = systemFont.fontDescriptor.withDesign(.rounded)
++    {
++      font = UIFont(descriptor: rounded, size: size)
++    } else if let name = style?.fontFamily, !name.isEmpty,
++      let named = UIFont(name: name, size: size)
+     {
+-
+       font = named
+     } else {
+-      font = .systemFont(ofSize: size, weight: weight)
++      font = systemFont
+     }
+ 
+     if style?.fontStyle?.lowercased() == "italic",
+diff --git a/nitrogen/generated/ios/c++/views/HybridCupertinoTabsComponent.mm b/nitrogen/generated/ios/c++/views/HybridCupertinoTabsComponent.mm
+index 3221f2c77159a88f5e3beb99c56f08e2cc2a4456..8196c9a733ce49f53aa0b8aa4da89e5e6adb67db 100644
+--- a/nitrogen/generated/ios/c++/views/HybridCupertinoTabsComponent.mm
++++ b/nitrogen/generated/ios/c++/views/HybridCupertinoTabsComponent.mm
+@@ -50,6 +50,7 @@ using namespace margelo::nitro::cupertinotabs::views;
+ 
+ - (instancetype) init {
+   if (self = [super init]) {
++    _props = HybridCupertinoTabsShadowNode::defaultSharedProps();
+     std::shared_ptr<HybridCupertinoTabsSpec> hybridView = CupertinoTabs::CupertinoTabsAutolinking::createCupertinoTabs();
+     _hybridView = std::dynamic_pointer_cast<HybridCupertinoTabsSpecSwift>(hybridView);
+     [self updateView];
