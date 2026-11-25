@@ -1,0 +1,3 @@
+const TYPOGRAPHY_ROUNDED_FAMILY = "ui-rounded";
+
+export { TYPOGRAPHY_ROUNDED_FAMILY };
