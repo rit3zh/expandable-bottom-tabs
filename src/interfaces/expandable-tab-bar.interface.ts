@@ -1,9 +1,10 @@
 import type { BottomTabBarProps } from "expo-router/tabs";
 import type { SFSymbol } from "expo-symbols";
-import type { ActionDispatch } from "react";
+import type { ActionDispatch, ComponentType } from "react";
 import type { DerivedValue, SharedValue } from "react-native-reanimated";
 import type { SkRRect } from "react-native-skia";
 
+import type { ILogo } from "./logo.interface";
 import type { TPalette, TPaletteKey } from "./palette.interface";
 
 type TBarMode = "collapsed" | "workspace" | "profile";
@@ -57,7 +58,7 @@ interface ITabItem {
 interface IWorkspace {
   name: string;
   caption: string;
-  mark: string;
+  logo: ComponentType<ILogo>;
   isVerified: boolean;
 }
 
