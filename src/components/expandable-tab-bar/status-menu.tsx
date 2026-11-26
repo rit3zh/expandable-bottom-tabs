@@ -53,15 +53,22 @@ const StatusMenuBase: FC<IStatusMenu> = ({
   const [panelHeight, setPanelHeight] = useState<number>(0);
   const highlightIndex = useSharedValue(-1);
   const highlightOffset = useSharedValue(0);
+  const highlightRadius = useSharedValue(MENU_HIGHLIGHT_RADIUS);
   const highlightOpacity = useSharedValue(0);
 
   const highlight = useMemo(
     () => ({
       index: highlightIndex,
       offset: highlightOffset,
+      radius: highlightRadius,
       opacity: highlightOpacity,
     }),
-    [highlightIndex, highlightOffset, highlightOpacity],
+    [
+      highlightIndex,
+      highlightOffset,
+      highlightRadius,
+      highlightOpacity,
+    ],
   );
 
   const geometry = useMemo(
@@ -76,6 +83,7 @@ const StatusMenuBase: FC<IStatusMenu> = ({
       moveMenuHighlight(
         highlight,
         resolveMenuIndex(event.x, event.y, PRESENCE_ORDER.length),
+        PRESENCE_ORDER.length,
       );
     },
     onUpdate: (event: PanGestureEvent): void => {
@@ -83,6 +91,7 @@ const StatusMenuBase: FC<IStatusMenu> = ({
       moveMenuHighlight(
         highlight,
         resolveMenuIndex(event.x, event.y, PRESENCE_ORDER.length),
+        PRESENCE_ORDER.length,
       );
     },
     onFinalize: (event: PanGestureEvent): void => {
@@ -92,7 +101,7 @@ const StatusMenuBase: FC<IStatusMenu> = ({
         event.y,
         PRESENCE_ORDER.length,
       );
-      moveMenuHighlight(highlight, -1);
+      moveMenuHighlight(highlight, -1, PRESENCE_ORDER.length);
       if (index >= 0) {
         scheduleOnRN(onSelect, PRESENCE_ORDER[index]);
       }
@@ -134,6 +143,7 @@ const StatusMenuBase: FC<IStatusMenu> = ({
 
   const highlightStyle = useAnimatedStyle(
     () => ({
+      borderRadius: highlightRadius.get(),
       opacity: highlightOpacity.get(),
       top: highlightOffset.get(),
       transform: [
@@ -219,7 +229,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     borderCurve: "continuous",
-    borderRadius: MENU_HIGHLIGHT_RADIUS,
     height: MENU_ROW_HEIGHT,
     left: MENU_PADDING,
     position: "absolute",
