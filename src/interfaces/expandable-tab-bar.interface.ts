@@ -96,6 +96,7 @@ interface IPresenceMorph {
 interface IMenuHighlight {
   index: SharedValue<number>;
   offset: SharedValue<number>;
+  radius: SharedValue<number>;
   opacity: SharedValue<number>;
 }
 
